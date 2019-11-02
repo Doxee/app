@@ -340,9 +340,9 @@
     "update": "Uppdatera"
   },
   "permissions": "Behörigheter",
-  "permissions_admin": "Admins have access to all managed data within the system by default.",
+  "permissions_admin": "Administratörer har som standard tillgång till all hanterad data i systemet.",
   "permissions_no_collections": "Det här projektet har inga samlingar än.",
-  "popular": "Popular",
+  "popular": "Populära",
   "port": "Port",
   "powered_by_directus": "Drivs av Directus",
   "preview_and_revert": "Preview and Revert",
