@@ -74,7 +74,7 @@
   "creating_role": "Skapar roll",
   "currently_selected": "Valt objekt: {thing}",
   "database_connection": "Databasanslutning",
-  "database_connection_copy": "Next, we need to know how to connect to the database where this project will be managed.",
+  "database_connection_copy": "Vi måste veta hur vi ska ansluta till databasen som ska hantera det här projektet.",
   "datatype": "Datatyp",
   "datatypes": {
     "mysql": {
