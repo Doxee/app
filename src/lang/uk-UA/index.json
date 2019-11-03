@@ -39,7 +39,7 @@
   "choose_project": "Оберіть проект",
   "clear": "Очистити",
   "clear_value": "Очистити значення",
-  "click_to_toggle_all_none": "Click to toggle entire column on/off",
+  "click_to_toggle_all_none": "Клацніть, щоб увімкнути / вимкнути всю колонку",
   "collection": "Колекція",
   "collection_contains_items": "Елементів у колекції {collection}: {count}",
   "collection_count": "Немає колекцій | Одна колекція | {count} колекцій",
