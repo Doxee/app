@@ -161,7 +161,7 @@
     "112": "Невірний OTP",
     "-1": "Не вдалося приєднатися до API"
   },
-  "esc_cancel": "Escape will cancel and close the window.",
+  "esc_cancel": "Escape скасує і закриє вікно.",
   "event_count": "No Events | One Event | {count} Events",
   "existing": "Існуючий",
   "extension_error": "Сталася помилка при завантаженні розширення {ext}.",
