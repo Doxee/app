@@ -84,7 +84,7 @@
       "DATE": "Дата. Діапазон від `1000-01-01` до `9999-12-31`.",
       "DATETIME": "Дата та час. Діапазон від `1000-01-01 00:00:00` до `9999-12-31 23:59:59`.",
       "DECIMAL": "Точне число (наприклад: валюта) з довжиною від 1 до 65 цифр (L) та від 0 до 30 десяткових (D). Формат довжини: `L,D`",
-      "DOUBLE": "An approximate binary number, 8 bytes with a floating decimal point.",
+      "DOUBLE": "Орієнтовний бінарний номер, 8 байт із плаваючою десятковою крапкою.",
       "FLOAT": "An approximate binary number, 4 bytes with a floating decimal point.",
       "INT": "An integer. When signed (allows negative) length is -2,147,483,648 to 2,147,483,647, otherwise the max is 4,294,967,295.",
       "LONGTEXT": "A string with a max length of 4,294,967,295 characters.",
