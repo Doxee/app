@@ -102,7 +102,7 @@ export default {
       if (!this.image) return "";
 
       return (
-        this.image.filename
+        this.image.filename_disk
           .split(".")
           .pop()
           .toUpperCase() +
