@@ -153,6 +153,12 @@ export default {
 
       if (Array.isArray(this.value)) {
         this.rows = this.value;
+      } else if (typeof this.value === "string") {
+        try {
+          this.rows = JSON.parse(this.value);
+        } catch {
+          console.warn("Invalid JSON passed to repeater");
+        }
       } else {
         this.rows = Object.values(this.value);
       }
