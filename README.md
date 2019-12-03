@@ -27,22 +27,10 @@ API_URL=http://localhost:8888 npm run dev
 
 ## Core Team
 
-<table>
-   <tr>
-      <td>
-         <a href="https://github.com/benhaynes"><img width="160px" src="https://user-images.githubusercontent.com/522079/42234532-dfa61084-7ec2-11e8-96df-23aa48c6d450.jpg"><br>
-         Ben Haynes</a><br>
-         <i>Project Lead</i>
-      </td>
-      <td>
-         <a href="https://github.com/rijkvanzanten"><img width="160px" src="https://github.com/rijkvanzanten.png"><br>
-         Rijk van Zanten</a><br>
-         <i>Tech Lead</i>
-      </td>
-   </tr>
-</table>
+* [Ben Haynes](https://github.com/benhaynes) _(Project Lead)_
+* [Rijk van Zanten](https://github.com/rijkvanzanten) _(Tech Lead)_
 
-**[Advisors, Sponsors, Partners, and Key Contributors](https://directus.io/organization.html#the-team)**
+[Advisors, Sponsors, Partners, and Key Contributors](https://directus.io/organization.html#the-team)
 
 ## License
 
