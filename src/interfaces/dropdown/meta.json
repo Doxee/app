@@ -23,10 +23,6 @@
         "valueOptions": {
           "monospace": true
         }
-      },
-      "default": {
-        "value1": "Option 1",
-        "value2": "Option 2"
       }
     },
     "placeholder": {

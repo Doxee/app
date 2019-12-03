@@ -429,7 +429,11 @@ export default {
     defaultValues() {
       return _.mapValues(this.fields, field => {
         if (field.type === "array") {
-          return field.default_value ? [field.default_value] : [];
+          if (field.default_value.includes(",")) {
+            return field.default_value.split(",");
+          } else {
+            return field.default_value ? [field.default_value] : [];
+          }
         }
 
         if (field.type === "boolean") {
