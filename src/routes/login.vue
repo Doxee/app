@@ -39,12 +39,20 @@
           </div>
         </div>
         <template v-else>
-          <input v-model="email" v-focus type="email" :placeholder="$t('email')" required />
+          <input
+            v-model="email"
+            v-focus
+            type="email"
+            :placeholder="$t('email')"
+            required
+            autocomplete="username"
+          />
           <input
             ref="password"
             v-model="password"
             type="password"
             :placeholder="$t('password')"
+            autocomplete="current-password"
             required
           />
           <div class="buttons">
