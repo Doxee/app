@@ -113,11 +113,13 @@ export default {
       });
     },
     defaultCollections() {
-      return this.collections.map(({ collection, icon }) => ({
-        link: `/${this.currentProjectKey}/collections/${collection}`,
-        name: this.$helpers.formatCollection(collection),
-        icon
-      }));
+      return this.collections
+        .map(({ collection, icon }) => ({
+          link: `/${this.currentProjectKey}/collections/${collection}`,
+          name: this.$helpers.formatCollection(collection),
+          icon
+        }))
+        .sort((a, b) => (a.name > b.name ? 1 : -1));
     }
   },
   methods: {
