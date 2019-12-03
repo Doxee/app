@@ -1,7 +1,7 @@
 <template>
   <component
     :is="componentName"
-    :id="name"
+    :id="currentInterface.id"
     :name="name"
     :input-name="id"
     :value="value"
@@ -108,8 +108,9 @@ export default {
     interfaces() {
       return this.$store.state.extensions.interfaces;
     },
-    interface() {
+    currentInterface() {
       if (this.id === null) return this.interfaceFallback;
+      if (this.interfaces[this.id] === undefined) return this.interfaceFallback;
       return this.interfaces && this.interfaces[this.id];
     },
     databaseVendor() {
@@ -120,16 +121,19 @@ export default {
       return `input-${this.id}`;
     },
     typeOrDefault() {
-      if (!this.interface) return null;
-      return this.type ? this.type : this.interface && this.interface.types[0];
+      if (!this.currentInterface) return null;
+      return this.type ? this.type : this.currentInterface && this.currentInterface.types[0];
     },
     optionsWithDefaults() {
-      if (!this.interface) return {};
+      if (!this.currentInterface) return {};
 
       // The API sometimes defaults to an empty array instead of a value
       if (Array.isArray(this.options)) return {};
 
-      const defaults = _.mapValues(this.interface.options, settings => settings.default || null);
+      const defaults = _.mapValues(
+        this.currentInterface.options,
+        settings => settings.default || null
+      );
 
       return {
         ...defaults,
@@ -179,10 +183,10 @@ export default {
 
       let component;
 
-      if (this.interface.core) {
-        component = import("@/interfaces/" + this.interface.id + "/input.vue");
+      if (this.currentInterface.core) {
+        component = import("@/interfaces/" + this.currentInterface.id + "/input.vue");
       } else {
-        const filePath = `${this.$store.state.apiRootPath}${this.interface.path.replace(
+        const filePath = `${this.$store.state.apiRootPath}${this.currentInterface.path.replace(
           "meta.json",
           "input.js"
         )}`;

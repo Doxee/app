@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <v-notice v-if="hasAllRequiredFields === false">
+    File preview can only be used on directus_fields.
+  </v-notice>
+  <div v-else>
     <div v-if="isImage" class="image">
       <img v-if="!imgError" id="image" :key="image.hash" :src="url" @error="imgError = true" />
       <div v-if="imgError" class="broken-image">
@@ -134,11 +137,21 @@ export default {
     };
   },
   computed: {
+    hasAllRequiredFields() {
+      const requiredFields = ["type", "filesize", "data", "id"];
+      let valid = true;
+      requiredFields.forEach(field => {
+        if (_.has(this.values, field) === false) {
+          valid = false;
+        }
+      });
+      return valid;
+    },
     canBeEdited() {
-      return this.values.filesize <= 1000000 && this.isImage;
+      return this.values?.filesize <= 1000000 && this.isImage;
     },
     isImage() {
-      switch (this.values.type) {
+      switch (this.values?.type) {
         case "image/jpeg":
         case "image/gif":
         case "image/png":
@@ -150,7 +163,7 @@ export default {
       return false;
     },
     isVideo() {
-      switch (this.values.type) {
+      switch (this.values?.type) {
         case "video/mp4":
         case "video/webm":
         case "video/ogg":
@@ -159,7 +172,7 @@ export default {
       return false;
     },
     isAudio() {
-      switch (this.values.type) {
+      switch (this.values?.type) {
         case "audio/mpeg":
         case "audio/ogg":
         case "audio/wav":
@@ -168,16 +181,16 @@ export default {
       return false;
     },
     isYouTube() {
-      return this.values.type === "embed/youtube";
+      return this.values?.type === "embed/youtube";
     },
     isVimeo() {
-      return this.values.type === "embed/vimeo";
+      return this.values?.type === "embed/vimeo";
     },
     fileType() {
-      return this.values.type.split("/")[1];
+      return this.values?.type.split("/")[1];
     },
     url() {
-      return this.values.data.full_url;
+      return this.values?.data.full_url;
     }
   },
   watch: {
@@ -250,10 +263,10 @@ export default {
         .getCroppedCanvas({
           imageSmoothingQuality: "high"
         })
-        .toDataURL(this.values.type);
+        .toDataURL(this.values?.type);
 
       try {
-        await this.$api.api.patch(`/files/${this.values.id}`, {
+        await this.$api.api.patch(`/files/${this.values?.id}`, {
           data: imageBase64
         });
 

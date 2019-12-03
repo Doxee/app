@@ -42,7 +42,7 @@
           }}
           <v-icon
             class="sort-icon"
-            color="table-head-border-color"
+            color="input-border-color-hover"
             size="24"
             name="sort"
             :class="sortVal.asc ? 'asc' : 'desc'"
