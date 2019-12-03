@@ -47,6 +47,7 @@
         boundariesElement: 'body'
       }"
       class="edit-user"
+      :class="{ smoke: avatarURL }"
       :to="`/${currentProjectKey}/users/${currentUser.id}`"
     >
       <v-avatar
@@ -279,19 +280,21 @@ export default {
   text-decoration: none;
   z-index: 2;
 
-  // Overlay
-  &::after {
-    transition: all var(--fast) var(--transition);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    content: "";
-    background-color: var(--module-background-color);
-    opacity: 0.5;
-    z-index: 1;
-    pointer-events: none;
+  &.smoke {
+    // Overlay
+    &::after {
+      transition: all var(--fast) var(--transition);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: "";
+      background-color: var(--module-background-color);
+      opacity: 0.5;
+      z-index: 1;
+      pointer-events: none;
+    }
   }
 
   &:hover {
