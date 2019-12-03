@@ -1012,8 +1012,6 @@ export default {
       }
     },
     field(val) {
-      this.field = this.validateFieldName(val);
-
       this.isFieldValid = !Object.keys(this.collectionInfo.fields).includes(val);
 
       if (this.relation) {
