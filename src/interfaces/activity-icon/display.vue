@@ -1,13 +1,13 @@
 <template>
   <div :style="{ color: 'var(--' + color + ')' }">
-    <v-progress-ring
+    <!-- <v-progress-ring
       class="icon"
       :radius="17"
       :icon="icon"
       :color="color"
       :progress="100"
       :stroke="2"
-    ></v-progress-ring>
+    ></v-progress-ring> -->
     <span class="label">
       <div>{{ label }}</div>
     </span>
