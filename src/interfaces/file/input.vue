@@ -1,82 +1,88 @@
 <template>
   <div class="input-single-file">
-    <v-card
-      v-if="Array.isArray(value) === false && value"
-      class="card"
-      :title="image.title"
-      :subtitle="subtitle + subtitleExtra"
-      :src="src"
-      :icon="icon"
-      :href="href"
-      text-background
-      color="black"
-      :options="{
-        deselect: {
-          text: $t('deselect'),
-          icon: 'clear'
-        },
-        remove: {
-          text: $t('delete'),
-          icon: 'delete'
-        }
-      }"
-      medium-image
-      @deselect="$emit('input', null)"
-      @remove="removeFile"
-    ></v-card>
-    <v-upload
-      v-else
-      small
-      :disabled="readonly"
-      class="uploader"
-      :accept="options.accept"
-      :multiple="false"
-      @upload="saveUpload"
-    ></v-upload>
+    <v-notice v-if="noFileAccess">
+      {{ $t("this_item_is_not_available") }}
+    </v-notice>
 
-    <div v-if="!value" class="buttons">
-      <v-button type="button" :disabled="readonly" @click="existing = true">
-        <v-icon name="playlist_add" />
-        {{ $t("existing") }}
-      </v-button>
-    </div>
-
-    <portal v-if="existing" to="modal">
-      <v-modal
-        :title="$t('choose_one')"
-        :buttons="{
-          done: {
-            text: $t('done')
+    <template v-else>
+      <v-card
+        v-if="Array.isArray(value) === false && value"
+        class="card"
+        :title="image.title"
+        :subtitle="subtitle + subtitleExtra"
+        :src="src"
+        :icon="icon"
+        :href="href"
+        text-background
+        color="black"
+        :options="{
+          deselect: {
+            text: $t('deselect'),
+            icon: 'clear'
+          },
+          remove: {
+            text: $t('delete'),
+            icon: 'delete'
           }
         }"
-        @cancel="existing = false"
-        @close="existing = false"
-        @done="existing = false"
-      >
-        <div class="content">
-          <div class="search">
-            <v-input
-              type="search"
-              :placeholder="$t('search_for_item')"
-              class="search-input"
-              @input="onSearchInput"
-            />
+        medium-image
+        @deselect="$emit('input', null)"
+        @remove="removeFile"
+      ></v-card>
+      <v-upload
+        v-else
+        small
+        :disabled="readonly"
+        class="uploader"
+        :accept="options.accept"
+        :multiple="false"
+        @upload="saveUpload"
+      ></v-upload>
+
+      <div v-if="!value" class="buttons">
+        <v-button type="button" :disabled="readonly" @click="existing = true">
+          <v-icon name="playlist_add" />
+          {{ $t("existing") }}
+        </v-button>
+      </div>
+
+      <portal v-if="existing" to="modal">
+        <v-modal
+          :title="$t('choose_one')"
+          :buttons="{
+            done: {
+              text: $t('done')
+            }
+          }"
+          @cancel="existing = false"
+          @close="existing = false"
+          @done="existing = false"
+        >
+          <div class="content">
+            <div class="search">
+              <v-input
+                type="search"
+                :placeholder="$t('search_for_item')"
+                class="search-input"
+                @input="onSearchInput"
+              />
+            </div>
+            <v-items
+              class="items"
+              collection="directus_files"
+              :view-type="viewType"
+              :selection="value ? [value] : []"
+              :filters="filters"
+              :view-query="viewQuery"
+              :view-options="viewOptions"
+              @options="setViewOptions"
+              @query="setViewQuery"
+              @select="saveSelection"
+            ></v-items>
           </div>
-          <v-items
-            class="items"
-            collection="directus_files"
-            :view-type="viewType"
-            :selection="value ? [value] : []"
-            :filters="filters"
-            :view-query="viewQuery"
-            :view-options="viewOptions"
-            @options="setViewOptions"
-            @query="setViewQuery"
-            @select="saveSelection"
-          ></v-items>
-        </div>
-      </v-modal>
-    </portal>
+        </v-modal>
+      </portal>
+    </template>
   </div>
 </template>
 
@@ -98,6 +104,9 @@ export default {
     };
   },
   computed: {
+    noFileAccess() {
+      return this.value && typeof this.value !== "object";
+    },
     subtitle() {
       if (!this.image) return "";
 
