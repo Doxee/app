@@ -403,6 +403,7 @@ export default {
           this.items.error = error;
         });
     },
+
     formatParams() {
       const availableFields = Object.keys(this.fields);
 
@@ -443,7 +444,7 @@ export default {
         }
 
         // Make sure we don't try to fetch non-existing fields
-        params.fields = params.filter(field => {
+        params.fields = params.fields.filter(field => {
           return availableFields.includes(field);
         });
 
