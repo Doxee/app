@@ -418,6 +418,11 @@ export default {
       if (this.viewQuery && this.viewQuery.fields) {
         if (params.fields instanceof Array == false) params.fields = params.fields.split(",");
 
+        // Make sure we don't try to fetch non-existing fields
+        params.fields = params.fields.filter(field => {
+          return availableFields.includes(field);
+        });
+
         params.fields = params.fields.map(field => `${field}.*`);
 
         if (!params.fields.includes(this.primaryKeyField)) {
@@ -442,11 +447,6 @@ export default {
             params.fields.push(`${this.statusField}.*`);
           }
         }
-
-        // Make sure we don't try to fetch non-existing fields
-        params.fields = params.fields.filter(field => {
-          return availableFields.includes(field);
-        });
 
         params.fields = params.fields.join(",");
       } else {
