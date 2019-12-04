@@ -404,6 +404,8 @@ export default {
         });
     },
     formatParams() {
+      const availableFields = Object.keys(this.fields);
+
       let params = {
         meta: "total_count,result_count",
         limit: this.$store.state.settings.values.default_limit,
@@ -425,7 +427,7 @@ export default {
           For non-admin users if created_at and status field is available in
           collection fetch it from API even if it is set hidden from info sidebar.
           Because for checking role_only and mine permissions while batch updating
-          or deleting data this fields are required.
+          or deleting data these fields are required.
           Fix 2123
         */
         if (!this.$store.state.currentUser.admin) {
@@ -440,9 +442,30 @@ export default {
           }
         }
 
+        // Make sure we don't try to fetch non-existing fields
+        params.fields = params.filter(field => {
+          return availableFields.includes(field);
+        });
+
         params.fields = params.fields.join(",");
       } else {
         params.fields = "*.*";
+      }
+
+      if (params.sort) {
+        const sortFields = params.sort.split(",");
+
+        params.sort = sortFields
+          .filter(field => {
+            if (field.startsWith("-")) {
+              field = field.substring(1);
+            }
+
+            return availableFields.includes(field);
+          })
+          .join(",");
+
+        if (params.sort.length === 0) delete params.sort;
       }
 
       if (this.searchQuery) {
