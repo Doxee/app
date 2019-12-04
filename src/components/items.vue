@@ -425,8 +425,15 @@ export default {
 
         params.fields = params.fields.map(field => `${field}.*`);
 
+        // Make sure to always fetch the primary key. This is needed to generate the links to the
+        // detail pages
         if (!params.fields.includes(this.primaryKeyField)) {
           params.fields.push(this.primaryKeyField);
+        }
+
+        // Make sure to always fetch the status values. These are needed for permissions.
+        if (this.statusField && !params.fields.includes(this.primaryKeyField)) {
+          params.fields.push(this.statusField);
         }
 
         /*
