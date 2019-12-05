@@ -12,7 +12,6 @@
         :subtitle="subtitle + subtitleExtra"
         :src="src"
         :icon="icon"
-        :href="href"
         text-background
         color="black"
         :options="{
@@ -145,11 +144,6 @@ export default {
     icon() {
       return this.image.type && !this.image.type.startsWith("image")
         ? getIcon(this.image.type)
-        : null;
-    },
-    href() {
-      return this.image.type && this.image.type === "application/pdf"
-        ? this.image.data.full_url
         : null;
     },
     viewOptions() {
