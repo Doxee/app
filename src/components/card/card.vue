@@ -12,7 +12,15 @@
     class="v-card"
     @click="$emit('click', $event)"
   >
-    <component :is="wrapperTag" :to="to" :href="href" target="__blank">
+    <component
+      :is="wrapperTag"
+      :to="to"
+      :href="href"
+      target="__blank"
+      :class="{
+        'only-show-on-hover': onlyShowOnHover
+      }"
+    >
       <div
         v-if="src || icon || $slots.icon"
         :style="{ backgroundColor: `var(--${color})` }"
@@ -66,6 +74,7 @@
         </div>
         <v-contextual-menu
           v-if="options"
+          class="context"
           :disabled="disabled"
           :options="options"
           @click="$emit($event)"
@@ -153,6 +162,10 @@ export default {
     mediumImage: {
       type: Boolean,
       default: false
+    },
+    onlyShowOnHover: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -206,7 +219,7 @@ export default {
   width: var(--card-size);
   overflow: hidden;
   transition: box-shadow var(--fast) var(--transition);
-  cursor: pointer;
+  position: relative;
 
   &.text-background {
     .header {
@@ -250,7 +263,7 @@ export default {
     position: relative;
 
     &.big-image {
-      height: 400px;
+      height: 474px;
     }
 
     &.medium-image {
@@ -421,6 +434,27 @@ export default {
     &.selected .select {
       opacity: 1;
     }
+  }
+
+  .context {
+    position: absolute;
+    right: 2px;
+    bottom: 15px;
+  }
+}
+
+.only-show-on-hover {
+  .body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity var(--fast) var(--transition);
+  }
+
+  &:hover .body {
+    opacity: 1;
   }
 }
 </style>
