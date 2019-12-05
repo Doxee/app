@@ -123,7 +123,7 @@ export default {
       // Image ? -> display dimensions and formatted filesize
       return this.image.type && this.image.type.startsWith("image")
         ? " • " + formatSize(this.image.filesize)
-        : null;
+        : "";
     },
     src() {
       return this.image.type && this.image.type.startsWith("image")

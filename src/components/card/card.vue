@@ -211,14 +211,13 @@ export default {
   &.text-background {
     .header {
       border-radius: var(--border-radius) var(--border-radius) 0 0;
-      &.medium-image {
-        height: 248px;
-      }
+      height: 244px;
     }
     .body {
       padding: 8px 12px;
       background-color: var(--input-background-color-alt);
       border-radius: 0 0 var(--border-radius) var(--border-radius);
+      min-height: 56px;
     }
   }
 
@@ -367,12 +366,11 @@ export default {
   }
 
   .title {
-    margin-bottom: 2px;
+    //
   }
 
   .subtitle {
     color: var(--note-text-color);
-    font-size: 13px;
   }
 
   .error {
