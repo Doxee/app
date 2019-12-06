@@ -84,6 +84,10 @@ export default {
 
         if (srcField === "data" && this.fields[srcField].collection === "directus_files") {
           if (item.type.startsWith("image") === false) return null;
+
+          if (item.type === "image/svg+xml") {
+            return item.data.url;
+          }
           privateHash = item?.private_hash;
         }
 
