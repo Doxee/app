@@ -133,6 +133,10 @@ export default {
         return null;
       }
 
+      if (this.image.type === "image/svg+xml") {
+        return this.image.data.url;
+      }
+
       const size = this.width === "full" ? "large" : "medium";
       const fit = this.options.crop ? "crop" : "contain";
 
